@@ -1,0 +1,105 @@
+{
+	"name": "markdown-visual",
+	"displayName": "Markdown-Visual",
+	"description": "A markdown plugin that the person who not familiar with markdown syntax can use.",
+	"version": "0.0.1",
+	"publisher": "NS",
+	"engines": {
+		"vscode": "^1.35.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:markdown"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [{
+			"command": "lilpig.titles",
+			"title": "Insert a title",
+			"icon":{
+				"dark": "./res/dark/title.svg",
+				"light": "./res/light/title.svg"
+			}
+		},{
+			"command": "lilpig.styles",
+			"title": "Add a style to the selected text",
+			"icon":{
+				"dark": "./res/dark/style.svg",
+				"light": "./res/light/style.svg"
+			}
+		},{
+			"command": "lilpig.imgs",
+			"title": "Insert a images",
+			"icon":{
+				"dark": "./res/dark/imgs.svg",
+				"light": "./res/light/imgs.svg"
+			}
+		},{
+			"command": "lilpig.list",
+			"title": "Insert a list",
+			"icon":{
+				"dark": "./res/dark/list.svg",
+				"light": "./res/light/list.svg"
+			}
+		},{
+			"command": "lilpig.table",
+			"title": "Insert a NxN table",
+			"icon":{
+				"dark": "./res/dark/table.svg",
+				"light": "./res/light/table.svg"
+			}
+		},{
+			"command": "lilpig.quote",
+			"title": "Insert a quote",
+			"icon":{
+				"dark": "./res/dark/quote.svg",
+				"light": "./res/light/quote.svg"
+			}
+		}],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "lilpig.titles",
+					"when": "editorLangId == markdown",
+					"group": "navigation@1"
+				},{
+					"command": "lilpig.styles",
+					"when": "editorLangId == markdown",
+					"group": "navigation@2"
+				},{
+					"command": "lilpig.imgs",
+					"when": "editorLangId == markdown",
+					"group": "navigation@3"
+				},{
+					"command": "lilpig.list",
+					"when": "editorLangId == markdown",
+					"group": "navigation@4"
+				},{
+					"command": "lilpig.table",
+					"when": "editorLangId == markdown",
+					"group": "navigation@5"
+				},{
+					"command": "lilpig.quote",
+					"when": "editorLangId == markdown",
+					"group": "navigation@6"					
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	}
+}
