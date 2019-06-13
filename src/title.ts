@@ -5,12 +5,13 @@ import * as vscode from 'vscode'
 export class TitleCommand extends MarkdownCommand{
     constructor(){
         super('lilpig.titles',{
-            一级标题: toggleFirstLevelTitle,
-            二级标题: toggleSecondLevelTitle,
-            三级标题: toggleSecondLevelTitle,
-            四级标题: toggleFourthLevelTitle,
-            五级标题: toggleFifthLevelTitle,
-            六级标题: toggleSixthLevelTitle
+            default: checkTitle,
+            '1级标题': toggleFirstLevelTitle,
+            '2级标题': toggleSecondLevelTitle,
+            '3级标题': toggleThirdLevelTitle,
+            '4级标题': toggleFourthLevelTitle,
+            '5级标题': toggleFifthLevelTitle,
+            '6级标题': toggleSixthLevelTitle
         });
     }
 
@@ -25,7 +26,19 @@ const  toggleFifthLevelTitle = (editor:vscode.TextEditor) => toggleTitle(editor,
 const  toggleSixthLevelTitle = (editor:vscode.TextEditor) => toggleTitle(editor,6);
 
 
-
+const checkTitle = (editor:vscode.TextEditor):boolean => {
+    const currentLineNum = editor.selection.start.line;
+    const lineText = editor.document.lineAt(currentLineNum).text;
+    let isHasTitleMatch = lineText.match('^#+ ');
+    if(isHasTitleMatch!=null){
+        let titleStr = isHasTitleMatch[0];
+        editor.edit((editorEdit=>{
+            editorEdit.delete(new vscode.Range(new vscode.Position(currentLineNum,0),new vscode.Position(currentLineNum,titleStr.length)))
+        }))
+        return true;
+    }
+    return false;
+}
 /**
  * 打开或关闭标题
  *  - 当本行有标题存在，无论是几级标题，直接弄没
@@ -35,18 +48,9 @@ const  toggleSixthLevelTitle = (editor:vscode.TextEditor) => toggleTitle(editor,
  */
 const  toggleTitle = (editor:vscode.TextEditor,level:number) => {
     const currentLineNum = editor.selection.start.line;
-    const lineText = editor.document.lineAt(currentLineNum).text;
     if(level > 0 && level <7){
-        let isHasTitleMatch = lineText.match('^#+ ');
-        if(isHasTitleMatch!=null){
-            let titleStr = isHasTitleMatch[0];
-            editor.edit((editorEdit=>{
-                editorEdit.delete(new vscode.Range(new vscode.Position(currentLineNum,0),new vscode.Position(currentLineNum,titleStr.length)))
-            }))
-        }else{
-            const titlePrifix = "#".repeat(level) + ' ';
-            editor.insertSnippet(new vscode.SnippetString(titlePrifix),new vscode.Position(currentLineNum,0))
-        }
+        const titlePrifix = "#".repeat(level) + ' ';
+        editor.insertSnippet(new vscode.SnippetString(titlePrifix),new vscode.Position(currentLineNum,0))
     }
 
 }

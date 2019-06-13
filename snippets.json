@@ -1,0 +1,175 @@
+{
+    "lilpig.insert_bold": {
+		"scope": "markdown",
+		"prefix": "b",
+		"body": [
+			"**$1**"
+		],
+		"description": "插入粗体"
+    },
+    "lilpig.insert_italic": {
+		"scope": "markdown",
+		"prefix": "i",
+		"body": [
+			"*$1*"
+		],
+        "description": "插入斜体"
+    },
+    "lilpig.insert_bolditalic": {
+		"scope": "markdown",
+		"prefix": "bi",
+		"body": [
+			"***$1***"
+		],
+        "description": "插入粗斜体"
+    },
+    "lilpig.insert_deleteline": {
+		"scope": "markdown",
+		"prefix": "d",
+		"body": [
+			"~~$1~~"
+		],
+        "description": "插入删除线体"
+    },
+    "lilpig.insert_highlight": {
+		"scope": "markdown",
+		"prefix": "h",
+		"body": [
+			"`$1`"
+		],
+        "description": "插入高亮块"
+    },
+    
+    "lilpig.insert_img": {
+		"scope": "markdown",
+		"prefix": "img",
+		"body": [
+			"![${1:alt}](${2:link})"
+		],
+        "description": "插入图片"
+    },
+    "lilpig.insert_link": {
+		"scope": "markdown",
+		"prefix": "a",
+		"body": [
+			"[${1:test}](${2:link})"
+		],
+        "description": "插入链接"
+    },
+
+    "lilpig.insert_codeblock": {
+		"scope": "markdown",
+		"prefix": "code",
+		"body": [
+            "```${1:text/plain}",
+            "$2",
+            "```"
+		],
+        "description": "插入代码块"
+    },
+    "lilpig.insert_codeblock_java": {
+		"scope": "markdown",
+		"prefix": "java",
+		"body": [
+            "```java",
+            "$1",
+            "```"
+		],
+        "description": "插入java代码块"
+    },
+    "lilpig.insert_codeblock_js": {
+		"scope": "markdown",
+		"prefix": "js",
+		"body": [
+            "```javascript",
+            "$1",
+            "```"
+		],
+        "description": "插入javascript代码块"
+    },
+    "lilpig.insert_codeblock_ts": {
+		"scope": "markdown",
+		"prefix": "ts",
+		"body": [
+            "```typescript",
+            "$1",
+            "```"
+		],
+        "description": "插入typescript代码块"
+    },
+    "lilpig.insert_codeblock_c": {
+		"scope": "markdown",
+		"prefix": "c",
+		"body": [
+            "```c",
+            "$1",
+            "```"
+		],
+        "description": "插入c代码块"
+    },
+    "lilpig.insert_codeblock_cp": {
+		"scope": "markdown",
+		"prefix": "cp",
+		"body": [
+            "```c++",
+            "$1",
+            "```"
+		],
+        "description": "插入c++代码块"
+    },
+    "lilpig.insert_codeblock_py": {
+		"scope": "markdown",
+		"prefix": "py",
+		"body": [
+            "```python",
+            "$1",
+            "```"
+		],
+        "description": "插入python代码块"
+    },
+    "lilpig.insert_codeblock_sql": {
+		"scope": "markdown",
+		"prefix": "sql",
+		"body": [
+            "```sql",
+            "$1",
+            "```"
+		],
+        "description": "插入sql代码块"
+    },
+    "lilpig.insert_codeblock_php": {
+		"scope": "markdown",
+		"prefix": "php",
+		"body": [
+            "```php",
+            "$1",
+            "```"
+		],
+        "description": "插入php代码块"
+    },
+    "lilpig.insert_codeblock_go": {
+		"scope": "markdown",
+		"prefix": "go",
+		"body": [
+            "```go",
+            "$1",
+            "```"
+		],
+        "description": "插入go代码块"
+    },
+    
+    "lilpig.insert_hexoheader": {
+      "scope": "markdown",
+      "prefix": "!h",
+      "body": [
+        "---",
+        "title: ${1:YOURTITLE}",
+        "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+        "tags: [${2:TAG}]",
+        "categories: ${4:CATEGORIES}",
+        "---"
+      ],
+      "description": "Insert Hexo Header"
+    }
+    
+}

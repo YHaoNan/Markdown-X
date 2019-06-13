@@ -4,11 +4,11 @@ import * as vscode from 'vscode'
 export class StyleCommand extends MarkdownCommand{
     constructor(){
         super('lilpig.styles',{
-            粗体: bold,
-            斜体: italic,
-            粗斜体: boldItalic,
-            强调块: highlightBlock,
-            删除线: deleteLine
+            '粗体 bold': bold,
+            '斜体 italic': italic,
+            '粗斜体 bold italic': boldItalic,
+            '高亮块 highlight block': highlightBlock,
+            '删除线 delete line': deleteLine
         });
     }
 }

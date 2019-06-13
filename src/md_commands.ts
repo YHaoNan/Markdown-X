@@ -5,5 +5,5 @@
 import * as vscode from 'vscode'
 
 export abstract class MarkdownCommand{
-    constructor(public id:string,public item:{[index:string]:(editor:vscode.TextEditor)=>void}){}
+    constructor(public id:string,public item:{[index:string]:(editor:vscode.TextEditor)=>boolean | void}){}
 }
