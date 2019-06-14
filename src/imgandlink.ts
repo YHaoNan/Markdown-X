@@ -22,7 +22,7 @@ const pickImage = (editor:vscode.TextEditor) => {
                 try{
                     let complv = parseInt(str as string);
                     if(complv>=1 && complv<100){
-                        handle(uris[0].fsPath,50,(err,data)=>{
+                        handle(uris[0].fsPath,complv,(err,data)=>{
                             if(err){
                                 vscode.window.showErrorMessage(err);
                             }else{

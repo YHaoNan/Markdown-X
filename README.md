@@ -1,4 +1,7 @@
-<a href="http://lilpig.site" target="_blank"><span style="border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;">LILPIG的博客</span></a> <a href="http://lilpig.site" target="_blank"><span style="border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;">LILPIG以前的博客</span></a>
+
+<a alt="测试版" href="#测试版"><span style="border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;  box-shadow:0px 0px 3px rgb(50, 50, 50);">Ver0.5</span></a>
+<a href="http://lilpig.site" target="_blank"><span style="margin-left:5px;border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;box-shadow:0px 0px 3px rgb(50, 50, 50);">LILPIG的博客</span></a> 
+
 
 # 快速开始
 开始前请确保安装了如下环境：
@@ -66,6 +69,7 @@ line2
 ![img](https://nsimg.cn-bj.ufileos.com/quote.png)|ctrl+shift+q
 
 上面的快捷键是使用`ctrl+shift+对应功能首字母`，你也可以选择使用`ctrl+shift+对应图标位置`的组合键，如下：
+
 图标|快捷键
 -|-
 ![img](https://nsimg.cn-bj.ufileos.com/title.png)|ctrl+shift+1
@@ -163,7 +167,19 @@ Hexo头：
     - !h 插入hexo博文的头部信息
 ```
 
+## 备份和上传
+自动备份和上传功能还不完善，因为不想把这两个功能定在编辑器里，在Linux上通过了测试，Windows上还没有测试。而且没有做很严格的hexo项目判断，在很多情况下可能会误判。
+
+在一个Markdown文件中右键会弹出两个选项，直接选择即可。
+
 ---
+## 自动完成和Snippets不显示
+加入如下设置
+```json
+"[markdown]":  {
+    "editor.quickSuggestions": true
+}
+```
 
 ## 关于图片
 上传图片时您可以选择压缩比，因为JPEG格式的图片压缩效果较好，所以所有的图片在压缩时都会转换为JPEG格式的图片。
