@@ -9,7 +9,8 @@ import {TableCommand} from './table'
 import {QuoteCommand} from './quote'
 import {NewLineCommand} from './newline'
 import {MarkdownAutoCompleteProvider} from './autocomplete'
-import {preview, deploy, backup} from './file_handler'
+import {preview} from './file_handler'
+import * as fs from 'fs';
 
 const COMMAND_LIST = [new TitleCommand(),new StyleCommand(),new ImageAndLinkCommand(),new ListCommand(),new TableCommand(),new QuoteCommand(),new NewLineCommand()];
 
@@ -26,21 +27,13 @@ export function activate(context: vscode.ExtensionContext) {
 	));
 
 	context.subscriptions.push(vscode.commands.registerCommand('lilpig.localpreview',(path)=>{
-		preview(getHexoProjectPath(path.path), vscode.window.createTerminal('Markdown X'));
-	}));
-	context.subscriptions.push(vscode.commands.registerCommand('lilpig.deployandbackup',(path)=>{
-		const terminal = vscode.window.createTerminal("Markdown X");
-		const mPath = getHexoProjectPath(path.path);
-		deploy(mPath,terminal);
-		backup(mPath,terminal);
+		preview(getHexoProjectPath(path.path));
 	}));
 }
 
 
 function getHexoProjectPath(path:string): string{
-	console.log(path);
 	const pathArr = path.split('/');
-	let resultPath = '';
 	let sourceStrPos = 0;
 	for(let i=pathArr.length-1;i>=0;i--){
 		if(pathArr[i]=='source'){
@@ -49,7 +42,11 @@ function getHexoProjectPath(path:string): string{
 		}
 	}
 	
-	return pathArr.slice(0,sourceStrPos).join('/');
+	let retPath =  pathArr.slice(0,sourceStrPos).join('/');
+	let pkgJson = retPath+'/package.json';
+	try{
+		if(require(pkgJson).hexo){return retPath;}else{return '';}
+	}catch{return '';}
 }
 function executeCommand(command:MarkdownCommand){
 	let activeEditor = vscode.window.activeTextEditor;

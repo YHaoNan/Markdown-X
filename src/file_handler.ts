@@ -2,24 +2,36 @@
  * Deploy and backup, preview in local.
  */
 import * as vscode from 'vscode'
-import { transcode } from 'buffer';
+import {exec} from 'child_process'
+import * as utils from './utils'
+const express = require('express')
+const pathM = require('path')
+const app = express()
 
+let isInited = false;
+let port = utils.getConfig<number>("lilpig.localpreviewport");
 
-export let deploy = (path:string,terminal:vscode.Terminal):void => {
-    execute(['cd '+path,"hexo g","hexo d"],terminal);
-}
-
-export let preview = (path:string,terminal:vscode.Terminal) => {
-    execute(["cd "+path,"hexo g","hexo s"],terminal);
-}
-
-export let backup = (path:string,terminal:vscode.Terminal) => {
-    execute(['cd '+path,'git add .','git commit * -m "NONE"','git push -f origin dev'],terminal);
-}
-
-export let execute = (command:string[],terminal:vscode.Terminal) =>{
-    console.log(command);
-    command.forEach(str=>{
-        terminal.sendText(str);
-    })
+export let preview = async (path:string) => {
+    if(path==''){
+        vscode.window.showErrorMessage("您不在一个hexo项目中...");return;
+    }
+    await vscode.window.withProgress({
+        title: `Synchronizing...`,
+        location: vscode.ProgressLocation.Notification,
+    }, async () => {
+        exec("cd \""+path+"\" && hexo g",(err,stdout,stderr)=>{
+            if(!err){
+                    if(!isInited){
+                        app.use(express.static(pathM.join(path, 'public')))
+                        app.listen(port, () => {
+                            isInited = true;
+                        })
+                    }
+                    vscode.window.showInformationMessage(!isInited?`本地预览已在${port}中打开`:`Done...`,'尝试在Chrome中打开').then(str=>{
+                        if(str=='尝试在Chrome中打开')
+                            exec('google-chrome http://localhost:'+port);
+                    });
+            }else vscode.window.showErrorMessage("运行失败:"+err.message);
+        });
+    });
 }

@@ -16,14 +16,9 @@ export class MarkdownAutoCompleteProvider implements vscode.CompletionItemProvid
                 console.log('matched');
                 result = result.concat(RULES[regex](match,range));
             }
+            
         });
-        console.log(result);
         return result?Promise.resolve(result):null;
-    }
-
-    public resolveCompletionItem(item: vscode.CompletionItem, token: vscode.CancellationToken): any{
-        console.log(item.range);
-        return item;
     }
 
 } 

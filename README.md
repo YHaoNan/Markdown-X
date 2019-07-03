@@ -1,8 +1,20 @@
+![Version Num](https://img.shields.io/github/package-json/v/YHaoNan/Markdown-X.svg?style=for-the-badge) 
+![VSCode Ver](https://img.shields.io/badge/vscode-%5E1.35.0-blue.svg?style=for-the-badge)
 
-<a alt="测试版" href="#测试版"><span style="border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;  box-shadow:0px 0px 3px rgb(50, 50, 50);">Ver0.5</span></a>
-<a href="http://lilpig.site" target="_blank"><span style="margin-left:5px;border-radius: 5px;background-color:#555;padding:5px 15px;color:#fff;box-shadow:0px 0px 3px rgb(50, 50, 50);">LILPIG的博客</span></a> 
+# Ver0.7 更新日志 2019/7/3 5:22
+### 添加
+1. hexo博客预览和同步  
+    将预览和同步功能加入到编辑器中
+### 修复
+1. 修复亮色标题图标的颜色显示问题
+2. 修复img-handler.py压缩后的效果问题
+### 删除
+1. hexo博客部署功能
 
-
+### 测试
+点击预览按钮，测试如下内容：
+1. 测试能否成功打开本地预览服务器
+2. 点击尝试在Chrome中打开，测试能否成功打开Chrome
 # 快速开始
 开始前请确保安装了如下环境：
 ```
@@ -14,7 +26,7 @@ python3.7
 ```
 node -v
 npm -v
-python --version
+python3 --version
 git --version
 ```
 

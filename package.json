@@ -2,7 +2,7 @@
   "name": "markdownx",
   "displayName": "Markdown X",
   "description": "A markdown plugin that the person who not familiar with markdown syntax or hexo can use.",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "publisher": "NS",
   "engines": {
     "vscode": "^1.35.0"
@@ -67,6 +67,11 @@
             ],
             "default": null,
             "description": "图片备份目录"
+          },
+          "lilpig.localpreviewport": {
+            "type":"integer",
+            "default":10404,
+            "description": "本地预览端口"
           }
         }
       }
@@ -123,12 +128,14 @@
       {
         "command": "lilpig.newline",
         "title": "跳转到新的一行"
-      },{
-        "command":"lilpig.deployandbackup",
-        "title": "发布到服务器并备份"
-      },{
+      },
+      {
         "command": "lilpig.localpreview",
-        "title": "本地预览"
+        "title": "预览和同步",
+        "icon": {
+          "dark": "./res/dark/preview.svg",
+          "light": "./res/light/preview.svg"
+        }
       }
     ],
     "keybindings": [
@@ -198,15 +205,6 @@
       }
     ],
     "menus": {
-      "editor/context": [
-        {
-          "command": "lilpig.deployandbackup",
-          "group": "navigation@1"
-        },{
-          "command": "lilpig.localpreview",
-          "group": "navigation@2"
-        }
-      ],
       "editor/title": [
         {
           "command": "lilpig.titles",
@@ -237,6 +235,10 @@
           "command": "lilpig.quote",
           "when": "editorLangId == markdown",
           "group": "navigation@6"
+        },{
+          "command": "lilpig.localpreview",
+          "when": "editorLangId == markdown",
+          "group": "navigation@7"
         }
       ]
     },
@@ -262,6 +264,7 @@
     "@types/mocha": "^2.2.42"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "ufile": "^1.0.2"
   }
 }

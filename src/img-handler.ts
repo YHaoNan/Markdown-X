@@ -7,7 +7,6 @@ import { pathToFileURL } from 'url';
 import {join} from 'path';
 
 export function handle(source:string,compressLevel:number,callback:(err:string|undefined,data:string|undefined)=>void){
-
     let handler_path = <string>getConfig('lilpig.imghandler_script');
     let ucloudPublicKey = <string>getConfig('lilpig.ucloud_publickey');
     let ucloudPrivateKey = <string>getConfig('lilpig.ucloud_privatekey');
