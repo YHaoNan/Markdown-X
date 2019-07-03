@@ -11,6 +11,7 @@ import {NewLineCommand} from './newline'
 import {MarkdownAutoCompleteProvider} from './autocomplete'
 import {preview} from './file_handler'
 import * as fs from 'fs';
+import * as path from 'path'
 
 const COMMAND_LIST = [new TitleCommand(),new StyleCommand(),new ImageAndLinkCommand(),new ListCommand(),new TableCommand(),new QuoteCommand(),new NewLineCommand()];
 
@@ -27,26 +28,31 @@ export function activate(context: vscode.ExtensionContext) {
 	));
 
 	context.subscriptions.push(vscode.commands.registerCommand('lilpig.localpreview',(path)=>{
-		preview(getHexoProjectPath(path.path));
+		preview(getHexoProjectPath(path.fsPath));
 	}));
 }
 
 
-function getHexoProjectPath(path:string): string{
-	const pathArr = path.split('/');
-	let sourceStrPos = 0;
-	for(let i=pathArr.length-1;i>=0;i--){
-		if(pathArr[i]=='source'){
-			sourceStrPos=i;
-			break;
+function getHexoProjectPath(currPath:string): string{
+
+	while(currPath!=''){
+		let stat = fs.statSync(currPath);
+		if(stat.isDirectory()){
+			let pkgJson = path.resolve(currPath,'package.json')
+			try{
+				if(require(pkgJson).hexo){
+					return currPath;
+				}
+			}catch{}
+			let tmp =  path.resolve(currPath,'..');
+			currPath = tmp==currPath? '':tmp;
+		}else{
+			//currPath默认是文件，而非目录
+			let tmp =  path.resolve(currPath,'..');
+			currPath = tmp==currPath? '':tmp;
 		}
 	}
-	
-	let retPath =  pathArr.slice(0,sourceStrPos).join('/');
-	let pkgJson = retPath+'/package.json';
-	try{
-		if(require(pkgJson).hexo){return retPath;}else{return '';}
-	}catch{return '';}
+	return '';
 }
 function executeCommand(command:MarkdownCommand){
 	let activeEditor = vscode.window.activeTextEditor;
